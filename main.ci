@@ -1,0 +1,38 @@
+mainmodule loimos {
+{
+    mainchare Main {
+        entry Main(CkArgMsg*);
+        entry void run() {
+            for(day = 0; day < num_days; day++) {
+                serial {
+                    PeopleProxy.StartVisit();
+                }
+                serial {
+                    CkStartQD(CkCallback(CkIndex_Main::SentVisits(), MainProxy));
+                }
+                serial {
+                    LocationsProxy.ComputeInteractions();
+                }
+                serial {
+                    CkStartQD(CkCallback(CkIndex_Main::ComputedInteractions(), MainProxy));
+                }
+            }
+        }
+        entry SentVisits(void);
+        entry ComputedInteractions(void);
+
+    }
+
+    array [1D] People {
+        entry People(void);
+        entry void StartVisit(const std::vector<int>& new_values);
+        entry void UpdateState(const InfectData& id);
+    };
+
+    array [1D] Locations {
+        entry Locations(void);
+        entry void ProcessVisits(const std::vector<VisitData>& vd, int from);
+        entry void ComputeInteractions(void);
+    };
+
+};
