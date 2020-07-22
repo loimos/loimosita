@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message Dist_Uniform {
+  int32 tmin = 1; // lower bound, SimTime type
+  int32 tmax = 2; // upper bound, SimTime type
+}
+
+message Dist_Normal {
+  int32 tmean = 1;  // SimTime type
+  int32 tstdev = 2; // SimTime type
+}
+
+message Dist_Forever {
+  int32 tforever = 1; // largest time value in SimTime type
+  // When unspecified, std::numeric_limits<SimTime>::max() will be used
+}
+
+message Dist_Histogram {
+  message Bin {
+    int32 tval = 1; // lower bound of the values in the bin, SimTime type
+    double prob = 2; // probability/frequency of the bin
+  }
+  repeated Bin bins = 1;
+}

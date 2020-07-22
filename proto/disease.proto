@@ -1,0 +1,45 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+import "distribution.proto";
+
+message Disease_Link {
+  double prob = 1;
+  string next_state = 2;
+}
+
+message Disease_Link_Set {
+  string label = 1;
+  repeated Disease_Link links = 2;
+}
+
+message Disease_State {
+  string label = 1;
+  double infectivity = 2;
+  double susceptibility = 3;
+  double incapacitation = 4;
+
+  oneof prodome_or_vulnerability {
+    int32 prodrome = 5;
+    int32 vulnerability = 6; 
+  }
+
+  oneof symptomatic_or_tracing {
+    int32 symptomatic = 7;
+    int32 tracing = 8;
+  }
+
+  oneof distribution {
+    Dist_Uniform   uniform   =  9;
+    Dist_Normal    normal    = 10;
+    Dist_Forever   forever   = 11;
+    Dist_Histogram histogram = 12;
+  }
+
+  // sets of outgoing transition edges
+  repeated Disease_Link_Set link_sets = 13;
+}
+
+message Disease_Manifestation {
+  string label = 1;
+  repeated Disease_State states = 2;
+}
