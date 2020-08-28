@@ -15,8 +15,12 @@
 class People : public CBase_People {
   private:
     int numLocalPeople;
+    int day;
+    int newCases;
     std::vector<char> peopleState;
+    std::vector<int> peopleDay;
     std::default_random_engine generator;
+    float MAX_RANDOM_VALUE;
   public:
     People();
     void SendVisitMessages(); 
