@@ -51,7 +51,7 @@ mainmodule loimos {
   array [1D] People {
     entry People();
     entry void SendVisitMessages(); // calls ReceiveVisitMessages
-    entry void ReceiveInfections(int,char);
+    entry void ReceiveInfections(int);
     entry void EndofDayStateUpdate(); // contribute call to ReceiveStats
   };
 

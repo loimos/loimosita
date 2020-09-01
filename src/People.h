@@ -24,7 +24,7 @@ class People : public CBase_People {
   public:
     People();
     void SendVisitMessages(); 
-    void ReceiveInfections(int personIdx, char state);
+    void ReceiveInfections(int personIdx);
     void EndofDayStateUpdate();
 };
 

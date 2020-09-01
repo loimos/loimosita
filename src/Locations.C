@@ -29,7 +29,6 @@ void Locations::ReceiveVisitMessages(int personIdx, char personState, int locati
 void Locations::ComputeInteractions() {
   int peopleSubsetIdx;
   int cont=0, globalIdx;
-  char state;
   float value;
   // traverses list of locations
   for(std::vector<std::vector<std::pair<int,char> > >::iterator locIter = locationPeople.begin() ; locIter != locationPeople.end(); ++locIter) {
@@ -42,9 +41,8 @@ void Locations::ComputeInteractions() {
         value = (float)generator();
         //CkPrintf("Partition %d - Location %d - Person %d - Value %f\n", thisIndex, globalIdx, *it, value);
 		if(it->second == SUSCEPTIBLE && value/MAX_RANDOM_VALUE < INFECTION_PROBABILITY){
-          state = EXPOSED;
           peopleSubsetIdx = getPartitionIndex(it->first, numPeople, numPeoplePartitions);
-          peopleArray[peopleSubsetIdx].ReceiveInfections(it->first, state);
+          peopleArray[peopleSubsetIdx].ReceiveInfections(it->first);
         }
       }
     }

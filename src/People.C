@@ -61,10 +61,10 @@ void People::SendVisitMessages() {
   }
 }
 
-void People::ReceiveInfections(int personIdx, char state) {
+void People::ReceiveInfections(int personIdx) {
   // updating state of a person
   int localIdx = getLocalIndex(personIdx, numPeople, numPeoplePartitions);
-  peopleState[localIdx] = state;
+  peopleState[localIdx] = EXPOSED;
   peopleDay[localIdx] = day + INCUBATION_PERIOD;
   //CkPrintf("Partition %d - Person %d state %d\n",thisIndex,personIdx,state);
 }
