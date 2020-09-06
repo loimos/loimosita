@@ -72,24 +72,24 @@ void People::ReceiveInfections(int personIdx) {
 void People::EndofDayStateUpdate() {
   int cont = 0;
   // counting infected people
-  for(std::vector<char>::iterator it = peopleState.begin() ; it != peopleState.end(); ++it){
-    switch(*it){
-		case SUSCEPTIBLE:
-          break;
-        case EXPOSED:
-          if(day > peopleDay[cont]) {
-            newCases++;
-            peopleDay[cont] = day + INFECTION_PERIOD;
-            peopleState[cont] = INFECTIOUS;
-          }
-          break;
-        case INFECTIOUS:
-          if(day > peopleDay[cont]) {
-            peopleState[cont] = RECOVERED;
-          }
-          break;
-        case RECOVERED:
-          break;
+  for(std::vector<char>::iterator it = peopleState.begin() ; it != peopleState.end(); ++it) {
+    switch(*it) {
+      case SUSCEPTIBLE:
+        break;
+      case EXPOSED:
+        if(day > peopleDay[cont]) {
+          newCases++;
+          peopleDay[cont] = day + INFECTION_PERIOD;
+          peopleState[cont] = INFECTIOUS;
+        }
+        break;
+      case INFECTIOUS:
+        if(day > peopleDay[cont]) {
+          peopleState[cont] = RECOVERED;
+        }
+        break;
+      case RECOVERED:
+        break;
     }
     cont++;
   }
